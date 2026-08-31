@@ -1,0 +1,8 @@
+# CPU-only override, for when the GPU is busy or the driver is unavailable:
+#   docker compose -f compose.yaml -f compose.cpu.yaml up -d
+services:
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices: !reset []
