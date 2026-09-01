@@ -18,15 +18,16 @@ numbers from this machine). Keep that split when editing either.
 `make help` lists every target. The ones that matter:
 
 ```
-make up        # start (GPU)
-make cpu-up    # start without GPU — ONE-OFF, see below
-make urls      # print the ports Docker actually published
-make ps        # health status
-make logs      # follow both services
-make models    # ollama list
-make gpu       # nvidia-smi inside the container — confirms GPU passthrough
-make register  # register loose Modelfiles as named models
-make down      # stop; all data kept
+make up           # start (GPU)
+make cpu-up       # start without GPU — ONE-OFF, see below
+make urls         # print the ports Docker actually published
+make ps           # health status
+make logs         # follow both services
+make models       # ollama list
+make pull-models  # download the MODELS set from the registry (MODELS="a b" to override)
+make gpu          # nvidia-smi inside the container — confirms GPU passthrough
+make register     # register loose Modelfiles as named models
+make down         # stop; all data kept
 ```
 
 Verifying a model after adding one — the five-step checklist (capabilities, does it answer,
@@ -40,7 +41,7 @@ Two containers, one job each, wired by `compose.yaml`:
 
 - `ollama` — inference server. Bind-mounts the pre-existing weight store
   `${OLLAMA_MODELS_DIR}` (default `/home/mehmet/ollama_models`) at `/root/.ollama`. Runs as
-  root because that directory is root-owned; do not chown it.
+  root because its contents are root-owned; do not chown it.
 - `open-webui` — chat UI, accounts, history, per-model settings, RAG index. Bind-mounts
   `./data/open-webui`. Waits on `condition: service_healthy` against ollama's `ollama list`
   healthcheck, so the UI never starts against a cold model server.

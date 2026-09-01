@@ -57,19 +57,22 @@ putting a single byte of downloaded model at risk.
 ## Commands
 
 ```
-make up        Start the stack (GPU)
-make cpu-up    Start without the GPU (one-off)
-make urls      Print the actual published URLs
-make down      Stop containers (models and history are kept)
-make logs      Follow logs
-make ps        Service status
-make models    List installed models
-make gpu       Verify GPU passthrough (nvidia-smi inside the container)
-make shell     Shell inside the ollama container
-make pull      Update both images
-make register  Register Modelfiles (e.g. GLM-Config) as named models
-make clean     Remove containers and network. Never touches model weights.
+make up           Start the stack (GPU)
+make cpu-up       Start without the GPU (one-off)
+make urls         Print the actual published URLs
+make down         Stop containers (models and history are kept)
+make logs         Follow logs
+make ps           Service status
+make models       List installed models
+make pull-models  Download the baseline model set (MODELS="a b" to override)
+make gpu          Verify GPU passthrough (nvidia-smi inside the container)
+make shell        Shell inside the ollama container
+make pull         Update both images
+make register     Register Modelfiles (e.g. GLM-Config) as named models
+make clean        Remove containers and network. Never touches model weights.
 ```
+
+`make pull-models` downloads model *weights*; `make pull` updates the two container *images*.
 
 ## Using the API from your own code
 
