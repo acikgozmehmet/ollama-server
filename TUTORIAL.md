@@ -197,6 +197,12 @@ docker compose exec ollama ollama pull llama3.2:1b
 Prefer this when scripting, when you want honest progress output, or when the download is large
 enough that you would rather not hold a browser tab open.
 
+`make pull-models` is the batch form of exactly this call: it loops the same
+`ollama pull` over the `MODELS` list in the `Makefile` (`llama3.2:1b qwen3:4b` by default, or
+`make pull-models MODELS="gemma3:4b"` for a one-off). That is what brings a fresh clone up to a
+working baseline in one command — the single-model invocation above stays the right choice when
+you already know the one tag you want.
+
 ### Route C — HuggingFace GGUF
 
 Any GGUF on HuggingFace works directly:
